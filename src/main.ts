@@ -1,11 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { filters } from './core/filters';
 import { ConsoleLogger, VersioningType } from '@nestjs/common';
 import { EnvService } from './core/env/env.service';
+import { filters } from './core/filters';
+import { pipes } from './core/pipes';
 import { swaggerFactory } from './core/swagger';
-import { patchNestJsSwagger, ZodValidationPipe } from 'nestjs-zod';
+import { patchNestJsSwagger } from 'nestjs-zod';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -48,7 +49,7 @@ async function bootstrap() {
   app.useGlobalFilters(...filters);
 
   // Pipes
-  app.useGlobalPipes(new ZodValidationPipe());
+  app.useGlobalPipes(...pipes);
 
   await app.listen(configService.get('PORT'));
 }
