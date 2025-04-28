@@ -6,10 +6,8 @@ export class DatabaseService implements OnModuleInit {
   private db: Database.Database;
 
   onModuleInit() {
-    // Create an in-memory database
     this.db = new Database(':memory:');
 
-    // Create a users table
     this.db.exec(`
       CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,7 +16,6 @@ export class DatabaseService implements OnModuleInit {
       );
     `);
 
-    // Insert some users
     const insert = this.db.prepare(
       'INSERT INTO users (username, password) VALUES (?, ?)',
     );
