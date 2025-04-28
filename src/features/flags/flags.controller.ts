@@ -2,11 +2,12 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import axios from 'axios';
 import { createZodDto } from 'nestjs-zod';
+import { DatabaseService } from 'src/core/db/database.service';
 import { z } from 'zod';
 
 const flagSchema = z.object({
   flagName: z.string(),
-  teamName: z.string(),
+  teamName: z.enum(['team1', 'team2', 'team3', 'team4']),
 });
 
 class FlagDto extends createZodDto(flagSchema) {}
@@ -15,6 +16,8 @@ class FlagDto extends createZodDto(flagSchema) {}
 export class FlagsController {
   private readonly webhookUrl =
     'https://discord.com/api/webhooks/1366427446181761135/yofJhI1mwsaRHFCSmtnIwDIAqIxrzUBOOuSCsIBV3DkkKj0-jkjBqQvKvAq3sb07LZpP';
+
+  constructor(private readonly db: DatabaseService) {}
 
   private getRandomFunnyMessage() {
     const messages = [
