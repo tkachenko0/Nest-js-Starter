@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ConsoleLogger, VersioningType } from '@nestjs/common';
-import { filters } from './core/filters';
+import { filters } from './core/exception-filters';
 import { pipes } from './core/pipes';
 import { swaggerFactory } from './core/swagger';
 import { patchNestJsSwagger } from 'nestjs-zod';
