@@ -7,6 +7,7 @@ import { EnvModule } from './core/env/env.module';
 import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './core/env/env';
 import { HealthModule } from './features/health/health.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { HealthModule } from './features/health/health.module';
     HealthModule,
     OrganizationModule,
     EnvModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
