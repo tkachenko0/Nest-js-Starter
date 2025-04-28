@@ -67,6 +67,13 @@ export class FlagsController {
     return { message: `Flag ${flagNumber} message sent!` };
   }
 
+  @Get('flag1')
+  flag1(@Body() body: FlagDto) {
+    return {
+      flag: 'SAIBORG-FLAG-77777',
+    };
+  }
+
   @Post('flag1')
   flag1(@Body() body: FlagDto) {
     return this.sendFlagMessage(1, body);
