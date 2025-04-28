@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { LogLevel } from '@nestjs/common';
-import { warn } from 'console';
 
 export const envSchema = z.object({
   PORT: z.coerce.number(),

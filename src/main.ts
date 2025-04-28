@@ -2,11 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ConsoleLogger, VersioningType } from '@nestjs/common';
-import { EnvService } from './core/env/env.service';
 import { filters } from './core/filters';
 import { pipes } from './core/pipes';
 import { swaggerFactory } from './core/swagger';
 import { patchNestJsSwagger } from 'nestjs-zod';
+import { EnvService } from './core/common-module/env/env.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

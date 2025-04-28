@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { FlagsController } from './flags.controller';
-import { DatabaseService } from 'src/core/db/database.service';
-import { EnvModule } from 'src/core/env/env.module';
+import { CommonModuleModule } from 'src/core/common-module/common-module.module';
 
 @Module({
-  imports: [EnvModule],
+  imports: [CommonModuleModule],
   controllers: [FlagsController],
-  providers: [DatabaseService],
+  providers: [],
 })
 export class FlagsModule {}

@@ -2,8 +2,8 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import axios from 'axios';
 import { createZodDto } from 'nestjs-zod';
-import { DatabaseService } from 'src/core/db/database.service';
-import { EnvService } from 'src/core/env/env.service';
+import { DatabaseService } from 'src/core/common-module/db/database.service';
+import { EnvService } from 'src/core/common-module/env/env.service';
 import { z } from 'zod';
 
 const flagSchema = z.object({
