@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { EnvModule } from './env/env.module';
 import { envSchema } from './env/env';
 import { DatabaseModule } from './db/database.module';
+import { DiscordModule } from './discord/discord.module';
 
 @Module({
   imports: [
@@ -12,8 +13,9 @@ import { DatabaseModule } from './db/database.module';
     }),
     EnvModule,
     DatabaseModule,
+    DiscordModule,
   ],
   providers: [],
-  exports: [EnvModule, DatabaseModule],
+  exports: [EnvModule, DatabaseModule, DiscordModule],
 })
 export class CommonModuleModule {}
