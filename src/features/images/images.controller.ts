@@ -3,9 +3,12 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { CreateImageDto } from './dto/create-image.dto';
 import axios from 'axios';
 import * as FormData from 'form-data';
+import { ImageUploadService } from './image-upload.service';
 
 @Controller('images')
 export class ImagesController {
+  constructor(private readonly imageUploadService: ImageUploadService) {}
+
   @Post('generate')
   async generate(@Body() createImageDto: CreateImageDto) {
     const { apiKey, prompt } = createImageDto;
@@ -22,12 +25,14 @@ export class ImagesController {
             ...form.getHeaders(),
             'x-api-key': apiKey,
           },
-          responseType: 'arraybuffer', // important to get binary data
+          responseType: 'arraybuffer',
         },
       );
 
+      const url = this.imageUploadService.uploadImage(response.data);
+
       return {
-        image: Buffer.from(response.data, 'binary').toString('base64'),
+        url,
       };
     } catch (error) {
       throw new Error(`Failed to generate image: ${error.message}`);

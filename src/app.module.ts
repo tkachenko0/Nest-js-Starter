@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -6,9 +7,20 @@ import { UsersModule } from './features/users/users.module';
 import { FlagsModule } from './features/flags/flags.module';
 import { CommonModuleModule } from './core/common-module/common-module.module';
 import { ImagesModule } from './features/images/images.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [CommonModuleModule, UsersModule, FlagsModule, ImagesModule],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
+    CommonModuleModule,
+    UsersModule,
+    FlagsModule,
+    ImagesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
