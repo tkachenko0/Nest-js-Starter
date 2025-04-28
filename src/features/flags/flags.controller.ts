@@ -68,7 +68,7 @@ export class FlagsController {
   }
 
   @Get('flag1')
-  flag1(@Body() body: FlagDto) {
+  getFlag1() {
     return {
       flag: 'SAIBORG-FLAG-77777',
     };
