@@ -37,6 +37,10 @@ export class FlagsController {
       return { message: 'Invalid team name!' };
     }
 
+    if (flagNumber === 4 && !flagName.endsWith('.png')) {
+      return { message: 'Flag 4 must end with .png!' };
+    }
+
     if (!this.flagsService.isExpectedFlag(flagNumber, flagName)) {
       return { message: 'Incorrect flag!' };
     }
