@@ -1,94 +1,28 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Controller, Post, Body } from '@nestjs/common';
-import axios from 'axios';
-import { warn } from 'console';
-import { createZodDto } from 'nestjs-zod';
-import { DatabaseService } from 'src/core/common-module/db/database.service';
-import { EnvService } from 'src/core/common-module/env/env.service';
-import { z } from 'zod';
-
-const flagSchema = z.object({
-  flagName: z.string(),
-  teamName: z.string(),
-});
-
-class FlagDto extends createZodDto(flagSchema) {}
+import { FlagDto } from './dto/flags.dto';
+import { FlagsService } from './flags.service';
 
 @Controller('flags')
 export class FlagsController {
-  private webhookUrl = '';
-
-  constructor(
-    private readonly db: DatabaseService,
-    private readonly envService: EnvService,
-  ) {
-    this.webhookUrl = this.envService.get('WEBHOOK_URL');
-  }
-
-  private getRandomFunnyMessage() {
-    const messages = [
-      "That was fast! Someone's been practicing! 🏃‍♂️💨",
-      'I hope you don’t cheat, but... that was impressive! 🤨😲',
-      "Wow, you're really good at this! Too good! 🏆🥇",
-      'Do you have a cheat code? Just kidding, nice work! 🎮😉',
-      'Flag collected faster than I can blink! 👀⚡',
-      'You guys are like the Flash! ⚡💨',
-    ];
-
-    return messages[Math.floor(Math.random() * messages.length)];
-  }
-
-  private validateTeamName(teamName: string): boolean {
-    const validTeamNames = this.envService.get('TEAM_NAMES');
-    const isInside = validTeamNames.includes(teamName);
-    return isInside;
-  }
+  constructor(private readonly flagsService: FlagsService) {}
 
   @Post('flag1')
-  async flag1(@Body() body: FlagDto) {
-    const { flagName, teamName } = body;
-    if (!this.validateTeamName(teamName)) {
-      warn(`Invalid team name: ${teamName}`);
-      return { message: 'Invalid team name!' };
-    }
-    const message = `${teamName} has collected the flag 1! ${this.getRandomFunnyMessage()}`;
-    await axios.post(this.webhookUrl, { content: message });
-    return { message: 'Flag 1 message sent!' };
+  flag1(@Body() body: FlagDto) {
+    return this.flagsService.sendFlagMessage(1, body);
   }
 
   @Post('flag2')
-  async flag2(@Body() body: FlagDto) {
-    const { flagName, teamName } = body;
-    if (!this.validateTeamName(teamName)) {
-      warn(`Invalid team name: ${teamName}`);
-      return { message: 'Invalid team name!' };
-    }
-    const message = `${teamName} has collected the flag 2! ${this.getRandomFunnyMessage()}`;
-    await axios.post(this.webhookUrl, { content: message });
-    return { message: 'Flag 2 message sent!' };
+  flag2(@Body() body: FlagDto) {
+    return this.flagsService.sendFlagMessage(2, body);
   }
 
   @Post('flag3')
-  async flag3(@Body() body: FlagDto) {
-    const { flagName, teamName } = body;
-    if (!this.validateTeamName(teamName)) {
-      warn(`Invalid team name: ${teamName}`);
-      return { message: 'Invalid team name!' };
-    }
-    const message = `${teamName} has collected the flag 3! ${this.getRandomFunnyMessage()}`;
-    await axios.post(this.webhookUrl, { content: message });
-    return { message: 'Flag 3 message sent!' };
+  flag3(@Body() body: FlagDto) {
+    return this.flagsService.sendFlagMessage(3, body);
   }
 
   @Post('flag4')
-  async flag4(@Body() body: FlagDto) {
-    const { flagName, teamName } = body;
-    if (!this.validateTeamName(teamName)) {
-      warn(`Invalid team name: ${teamName}`);
-      return { message: 'Invalid team name!' };
-    }
-    const message = `${teamName} has collected the flag 4! ${this.getRandomFunnyMessage()}`;
-    await axios.post(this.webhookUrl, { content: message });
-    return { message: 'Flag 4 message sent!' };
+  flag4(@Body() body: FlagDto) {
+    return this.flagsService.sendFlagMessage(4, body);
   }
 }
