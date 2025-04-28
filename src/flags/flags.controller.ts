@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Controller, Post, Body } from '@nestjs/common';
 import axios from 'axios';
 import { createZodDto } from 'nestjs-zod';
@@ -31,7 +32,7 @@ export class FlagsController {
   @Post('flag1')
   async flag1(@Body() body: FlagDto) {
     const { flagName, teamName } = body;
-    const message = `${teamName} has collected the flag ${flagName}! ${this.getRandomFunnyMessage()}`;
+    const message = `${teamName} has collected the flag 1! ${this.getRandomFunnyMessage()}`;
     await axios.post(this.webhookUrl, { content: message });
     return { message: 'Flag 1 message sent!' };
   }
@@ -39,7 +40,7 @@ export class FlagsController {
   @Post('flag2')
   async flag2(@Body() body: FlagDto) {
     const { flagName, teamName } = body;
-    const message = `${teamName} has collected the flag ${flagName}! ${this.getRandomFunnyMessage()}`;
+    const message = `${teamName} has collected the flag 2! ${this.getRandomFunnyMessage()}`;
     await axios.post(this.webhookUrl, { content: message });
     return { message: 'Flag 2 message sent!' };
   }
@@ -47,7 +48,7 @@ export class FlagsController {
   @Post('flag3')
   async flag3(@Body() body: FlagDto) {
     const { flagName, teamName } = body;
-    const message = `${teamName} has collected the flag ${flagName}! ${this.getRandomFunnyMessage()}`;
+    const message = `${teamName} has collected the flag 3! ${this.getRandomFunnyMessage()}`;
     await axios.post(this.webhookUrl, { content: message });
     return { message: 'Flag 3 message sent!' };
   }
@@ -55,7 +56,7 @@ export class FlagsController {
   @Post('flag4')
   async flag4(@Body() body: FlagDto) {
     const { flagName, teamName } = body;
-    const message = `${teamName} has collected the flag ${flagName}! ${this.getRandomFunnyMessage()}`;
+    const message = `${teamName} has collected the flag 4! ${this.getRandomFunnyMessage()}`;
     await axios.post(this.webhookUrl, { content: message });
     return { message: 'Flag 4 message sent!' };
   }
