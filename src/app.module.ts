@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './core/env/env';
 import { HealthModule } from './features/health/health.module';
 import { UsersModule } from './users/users.module';
+import { FlagsModule } from './flags/flags.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from './users/users.module';
     OrganizationModule,
     EnvModule,
     UsersModule,
+    FlagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
