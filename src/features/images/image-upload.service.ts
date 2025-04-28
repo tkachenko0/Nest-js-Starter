@@ -12,7 +12,7 @@ export class ImageUploadService {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
 
-    const filename = `${uuidv4()}.png`;
+    const filename = `${uuidv4()}-flag4.png`;
     const filePath = path.join(uploadDir, filename);
 
     fs.writeFileSync(filePath, imageBuffer);

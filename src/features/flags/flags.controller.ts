@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Headers } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { FlagDto } from './dto/flags.dto';
 import { FlagsService } from './flags.service';
 import { EnvService } from 'src/core/common-module/env/env.service';
@@ -33,7 +33,6 @@ export class FlagsController {
 
   async sendFlagMessage(flagNumber: number, body: FlagDto) {
     const { teamName, flagName } = body;
-
     if (!this.validateTeamName(teamName)) {
       return { message: 'Invalid team name!' };
     }
@@ -48,10 +47,19 @@ export class FlagsController {
       };
     }
 
+    console.log('Received flag:', flagNumber, 'from team:', teamName);
     this.flagsService.markFlagAsCollected(flagNumber, teamName);
 
-    const message = `${teamName} has collected flag ${flagNumber}! ${this.getRandomFunnyMessage()}`;
-    await this.discordService.sendMessage(message);
+    if (flagNumber === 4) {
+      const imageUrl = `https://nest-js-boilerplate-production.up.railway.app/uploads/${flagName}`;
+      const message = `${teamName} has collected flag ${flagNumber}! 🎉`;
+      console.log('Sending image message:', message);
+      await this.discordService.sendMessageWithImage(message, imageUrl);
+    } else {
+      const message = `${teamName} has collected flag ${flagNumber}! ${this.getRandomFunnyMessage()}`;
+      await this.discordService.sendMessage(message);
+    }
+
     return { message: `Flag ${flagNumber} message sent!` };
   }
 

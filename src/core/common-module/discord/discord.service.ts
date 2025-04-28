@@ -14,5 +14,18 @@ export class DiscordService implements OnModuleInit {
     return await axios.post(this.webhookUrl, { content: message });
   }
 
+  async sendMessageWithImage(message: string, imageUrl: string) {
+    return await axios.post(this.webhookUrl, {
+      content: message,
+      embeds: [
+        {
+          image: {
+            url: imageUrl,
+          },
+        },
+      ],
+    });
+  }
+
   onModuleInit() {}
 }

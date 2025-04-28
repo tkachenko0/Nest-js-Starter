@@ -27,7 +27,11 @@ export class FlagsService {
 
   isExpectedFlag(flagNumber: number, flagName: string): boolean {
     const expectedFlag = this.flags.get(flagNumber);
-    return flagName === expectedFlag;
+    return (
+      !!expectedFlag &&
+      (!!expectedFlag.toLowerCase().includes(flagName.toLowerCase()) ||
+        !!flagName.toLowerCase().includes(expectedFlag.toLowerCase()))
+    );
   }
 
   stats(): Record<string, number> {
