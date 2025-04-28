@@ -5,10 +5,10 @@ export class FlagsService {
   private collectedFlags: Map<string, Set<string>> = new Map(); // Track collected flags per team
 
   private flags = new Map<number, string>([
-    [1, 'flag1'],
-    [2, 'flag2'],
-    [3, 'flag3'],
-    [4, 'flag4'],
+    [1, 'SAIBORG-FLAG-77777'],
+    [2, 'SAIBORG-FLAG-TRV3L'],
+    [3, 'SAIBORG-FLAG-SE132'],
+    [4, 'SAIBORG-FLAG-ULA42'],
   ]);
 
   isFlagAlreadyCollected(flagNumber: number, teamName: string): boolean {
