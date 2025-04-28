@@ -3,6 +3,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import axios from 'axios';
 import { createZodDto } from 'nestjs-zod';
 import { DatabaseService } from 'src/core/db/database.service';
+import { EnvService } from 'src/core/env/env.service';
 import { z } from 'zod';
 
 const flagSchema = z.object({
@@ -14,10 +15,14 @@ class FlagDto extends createZodDto(flagSchema) {}
 
 @Controller('flags')
 export class FlagsController {
-  private readonly webhookUrl =
-    'https://discord.com/api/webhooks/1366427446181761135/yofJhI1mwsaRHFCSmtnIwDIAqIxrzUBOOuSCsIBV3DkkKj0-jkjBqQvKvAq3sb07LZpP';
+  private webhookUrl = '';
 
-  constructor(private readonly db: DatabaseService) {}
+  constructor(
+    private readonly db: DatabaseService,
+    private readonly envService: EnvService,
+  ) {
+    this.webhookUrl = this.envService.get('WEBHOOK_URL');
+  }
 
   private getRandomFunnyMessage() {
     const messages = [
