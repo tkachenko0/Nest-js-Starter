@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const config = new DocumentBuilder()
-  .setTitle('Next.js Template API')
+  .setTitle('SAIBORG Flags API')
   .setDescription('The API description')
   .build();
 
