@@ -7,8 +7,8 @@ import { EnvModule } from './core/env/env.module';
 import { ConfigModule } from '@nestjs/config';
 import { envSchema } from './core/env/env';
 import { HealthModule } from './features/health/health.module';
-import { UsersModule } from './users/users.module';
-import { FlagsModule } from './flags/flags.module';
+import { UsersModule } from './features/users/users.module';
+import { FlagsModule } from './features/flags/flags.module';
 
 @Module({
   imports: [
