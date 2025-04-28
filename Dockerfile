@@ -12,7 +12,7 @@ RUN npm run build
 FROM node:20-slim AS production
 RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
 WORKDIR /usr/src/app
-RUN mkdir uploads
+RUN mkdir -p uploads && chown appuser:appgroup uploads
 COPY --chown=appuser:appgroup package*.json ./
 COPY --from=builder --chown=appuser:appgroup /usr/src/app/dist ./dist
 COPY --from=builder --chown=appuser:appgroup /usr/src/app/node_modules ./node_modules
