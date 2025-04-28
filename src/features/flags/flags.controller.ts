@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Headers } from '@nestjs/common';
 import { FlagDto } from './dto/flags.dto';
 import { FlagsService } from './flags.service';
 import { EnvService } from 'src/core/common-module/env/env.service';
@@ -74,4 +74,24 @@ export class FlagsController {
   flag4(@Body() body: FlagDto) {
     return this.sendFlagMessage(4, body);
   }
+
+  @Get('stats')
+  getStats(): ReturnType<typeof this.flagsService.stats> {
+    return this.flagsService.stats();
+  }
+
+  // @Post('send-discord-stats')
+  // async sendStats(@Headers('password') password: string) {
+  //   if (password !== 'viacheslav1234') {
+  //     return { message: 'Invalid password!' };
+  //   }
+  //   const stats = this.flagsService.stats();
+  //   const statsMessage = Object.entries(stats)
+  //     .map(([teamName, collectedFlags]) => `${teamName}: ${collectedFlags}`)
+  //     .join('\n');
+  //   console.log(statsMessage);
+  //   await this.discordService.sendMessage(
+  //     `Current flag stats:\n${statsMessage}`,
+  //   );
+  // }
 }
